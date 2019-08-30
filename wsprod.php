@@ -17,7 +17,7 @@ function inserir(Produto $p)
 
 function buscaPorId($id)
 {
-    foreach ($GLOBALS["produtos"] as $produto) {
+    foreach($GLOBALS["produtos"] as $produto) {
         if($produto->id == $id)
             return $produto;
     }

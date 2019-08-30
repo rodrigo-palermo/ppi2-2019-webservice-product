@@ -1,0 +1,27 @@
+{
+    "deploy": {
+        "packages": [
+            {
+                "name": "WebService Pordutos 1.0",
+                "description": "Package version 1.0",
+                "files": [
+                    "**",
+                    "**/*.php",
+                    "/*.json"
+                ],
+                "exclude": [
+
+                ],
+                "deployOnSave": true
+            }
+        ],
+        "targets": [
+            {
+                "type": "local",
+                "name": "WebService Pordutos local folder",
+                "description": "Local folder",
+                "dir": "C:/xampp/htdocs/wsprodutos"
+            }
+        ]
+    }
+}
