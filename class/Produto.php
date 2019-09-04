@@ -7,7 +7,7 @@ class Produto {
     public $preco;
 
     function __construct($id = "", $nome = "", $preco = "")
-    { //construtor dinamico - plimorfismo
+    { //construtor dinamico - polimorfismo
         $this->id = $id;
         $this->nome = $nome;
         $this->preco = $preco;

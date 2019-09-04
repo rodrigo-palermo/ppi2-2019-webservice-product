@@ -1,5 +1,5 @@
 {
-    "deploy": {
+    "deploy.reloaded": {
         "packages": [
             {
                 "name": "WebService Pordutos 1.0",
@@ -12,10 +12,12 @@
                 "exclude": [
 
                 ],
-                "deployOnSave": true
+                "deployOnSave": ["WebService Pordutos local folder"],
+                "removeOnChange": true,
+                "deployOnChange": true
             }
-        ],
-        "targets": [
+        ],        "targets": [
+          
             {
                 "type": "local",
                 "name": "WebService Pordutos local folder",

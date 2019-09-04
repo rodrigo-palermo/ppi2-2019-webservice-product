@@ -78,16 +78,6 @@ switch($metodo){
         echo $pjson;
     break;
 
-    case "POST":
-        ?>
-        <form method='post'>
-        <fieldset>
-        <legend>Cadastro de Produtos</legend>
-        </fieldset>
-        </form>
-        <?php
-    break;
-
     case "DELETE":
         $id = intval($_GET["id"]);
         deletar($id);
