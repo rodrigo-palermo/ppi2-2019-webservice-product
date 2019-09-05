@@ -7,15 +7,15 @@ require __DIR__."/dao/ProdutoDAO.php";
 //verificando a chamada de metodo pelo servidor
 $metodo = $_SERVER["REQUEST_METHOD"];
 
-$produtos = ProdutoDAO::listar();
-
 
 switch($metodo){
 
     case "GET":
+        $produtos = ProdutoDAO::listar();
         if(!empty($_GET['id'])){
             $id = intval($_GET["id"]);
-            $produtos = buscaPorId($id);
+            $produtoDAO = new ProdutoDAO();
+            $produtos = $produtoDAO->buscaPorId($id);
         }
         $pjson = json_encode($produtos);
         header("Content-type:application/json"); //o header se prepara para receber um json
@@ -26,12 +26,13 @@ switch($metodo){
         //simula uma interface de entrada de dados em json usando o postman
         $djson = file_get_contents("php://input");
         $dados = json_decode($djson);
-        $p = new Produto($dados->id, $dados->nome, $dados->preco);
-        inserir($p);
-        $pjson = json_encode($produtos);
+        $produtoDAO = new ProdutoDAO();
+        $p = new Produto('',$dados->nome, $dados->preco);
+        $produtoDAO->inserir($p);
+        //$pjson = json_encode($produtos);
         header("Content-type:application/json");
         header("HTTP/1.1 201 CREATED");
-        echo $pjson;
+        //echo $pjson;
     break;
 
     case "PUT":

@@ -7,13 +7,23 @@ class ProdutoDAO {
 
     function inserir(Produto $p)
     {
+        $con = PDOFactory::getConexao();
+        $stmt = $con->prepare('INSERT INTO produtos (nome,preco) VALUES (:nome,:preco)');
+        $stmt->bindParam('nome',$p->nome);
+        $stmt->bindParam('preco',$p->preco);
+        $stmt->execute();
+        $con->lastInsertId();
 
     }
-    function buscaPorId($id)
+    public function buscaPorId($id)
     {
         $con = PDOFactory::getConexao();
-        $stmt = $con->prepare("Select nome, preco from produtos where id = :id");
-        
+        $stmt = $con->prepare("Select id, nome, preco from produtos where id = :id");
+        $stmt->bindParam('id',$id);
+        $stmt->execute();
+        $resultSet = $stmt->fetch();
+        return new Produto($resultSet['id'],$resultSet['nome'],$resultSet['preco']);
+   
     }
 
     function atualizar(Produto $pnovo)
@@ -24,21 +34,16 @@ class ProdutoDAO {
     public static function listar()
     {
         $con = PDOFactory::getConexao();
-        $result = $con->query('Select id, nome, preco from produtos');
-        //$stmt->execute();
+        $stmt = $con->prepare('Select id, nome, preco from produtos');
+        $stmt->execute();
         $data = [];
-        //$result = $con->query($stmt);
-        foreach($result as $r) {
-            $p = new Produto($r['id'],
-                             $r['nome'],
-                             $r['preco']);
-            $data[] = $p;
+        $resultSet = $stmt->fetchAll();
+        foreach($resultSet as $r) {
+            $data[] = new Produto($r['id'],
+                                  $r['nome'],
+                                  $r['preco']);
         }
-
         return $data;
-        
-
-
     }
 
     function deletar($id)

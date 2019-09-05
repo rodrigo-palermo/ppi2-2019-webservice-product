@@ -22,7 +22,10 @@
                 "type": "local",
                 "name": "WebService Pordutos local folder",
                 "description": "Local folder",
+                //home
                 "dir": "C:/xampp/htdocs/wsprodutosdao"
+                //work
+                //"dir": "C:/app/xampp/htdocs/wsprodutosdao"
             }
         ]
     }
