@@ -1,46 +1,14 @@
 <?php
-include "class/Produto.php";
+require_once "class/Produto.php";
+require __DIR__."/dao/ProdutoDAO.php";
 
-$produtos = [];
-
-inserir(new Produto(1, "Livro", 42.60));
-inserir(new Produto(2, "Caderno", 10.15));
-inserir(new Produto(3, "Lápis", 2.10));
-inserir(new Produto(4, "Caneta", 3.25));
-
-//var_dump($GLOBALS);
-
-function inserir(Produto $p)
-{
-    $GLOBALS["produtos"][] = $p;
-}
-
-function buscaPorId($id)
-{
-    foreach($GLOBALS["produtos"] as $produto) {
-        if($produto->id == $id)
-            return $produto;
-    }
-}
-
-function atualizar(Produto $pnovo)
-{
-    foreach($GLOBALS["produtos"] as $i => $produto) {
-        if($produto->id == $pnovo->id)
-            $GLOBALS["produtos"][$i] = $pnovo;
-    }
-}
-
-function deletar($id)
-{
-    foreach($GLOBALS["produtos"] as $i => $produto) {
-        if($produto->id == $id)
-            unset($GLOBALS["produtos"][$i]);
-    }
-}
+//OBS.: array deletado e funcoes passadas para dao/ProdutoDAO.php
 
 //verificando a chamada de metodo pelo servidor
 $metodo = $_SERVER["REQUEST_METHOD"];
+
+$produtos = ProdutoDAO::listar();
+
 
 switch($metodo){
 
