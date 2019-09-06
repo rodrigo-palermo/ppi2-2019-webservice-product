@@ -39,21 +39,22 @@ switch($metodo){
         //simula uma interface de entrada de dados em json usando o postman
         $djson = file_get_contents("php://input");
         $dados = json_decode($djson);
+        $produtoDAO = new ProdutoDAO();
         $p = new Produto($dados->id, $dados->nome, $dados->preco);
-        atualizar($p);
-        $pjson = json_encode($produtos);
+        $produtoDAO->atualizar($p);
+        //$pjson = json_encode($produtos);
         header("Content-type:application/json");
         header("HTTP/1.1 200 OK");
-        echo $pjson;
+        //echo $pjson;
     break;
 
     case "DELETE":
         $id = intval($_GET["id"]);
-        deletar($id);
-        $pjson = json_encode($produtos);
+        ProdutoDAO::deletar($id);
+        //$pjson = json_encode($produtos);
         header("Content-type:application/json"); //o header se prepara para receber um json
         header("HTTP/1.1 200 OK");
-        echo $pjson;
+        //echo $pjson;
     break;
 
     default:

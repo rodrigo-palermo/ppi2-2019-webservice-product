@@ -18,7 +18,7 @@ class ProdutoDAO {
     public function buscaPorId($id)
     {
         $con = PDOFactory::getConexao();
-        $stmt = $con->prepare("Select id, nome, preco from produtos where id = :id");
+        $stmt = $con->prepare("SELECT id, nome, preco FROM produtos WHERE id = :id");
         $stmt->bindParam('id',$id);
         $stmt->execute();
         $resultSet = $stmt->fetch();
@@ -28,7 +28,13 @@ class ProdutoDAO {
 
     function atualizar(Produto $pnovo)
     {
-        
+        $con = PDOFactory::getConexao();
+        $stmt = $con->prepare("UPDATE produtos SET nome = :nome, preco = :preco WHERE id = :id");
+        $stmt->bindParam('id',$pnovo->id);
+        $stmt->bindParam('nome',$pnovo->nome);
+        $stmt->bindParam('preco',$pnovo->preco);
+        $stmt->execute();
+
     }
 
     public static function listar()
@@ -46,9 +52,12 @@ class ProdutoDAO {
         return $data;
     }
 
-    function deletar($id)
+    public static function deletar($id)
     {
-        
+        $con = PDOFactory::getConexao();
+        $stmt = $con->prepare('DELETE FROM produtos WHERE id=:id');
+        $stmt->bindParam('id',$id);
+        $stmt->execute();
     }
 
 
