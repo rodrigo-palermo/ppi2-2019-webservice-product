@@ -1,6 +1,6 @@
 <?php
-require_once "class/Produto.php";
-require __DIR__."/dao/ProdutoDAO.php";
+require_once __DIR__."/class/Produto.php";
+require_once __DIR__."/dao/ProdutoDAO.php";
 
 //OBS.: array deletado e funcoes passadas para dao/ProdutoDAO.php
 
@@ -11,11 +11,12 @@ $metodo = $_SERVER["REQUEST_METHOD"];
 switch($metodo){
 
     case "GET":
-        $produtos = ProdutoDAO::listar();
         if(!empty($_GET['id'])){
             $id = intval($_GET["id"]);
             $produtoDAO = new ProdutoDAO();
             $produtos = $produtoDAO->buscaPorId($id);
+        } else {
+            $produtos = ProdutoDAO::listar();
         }
         $pjson = json_encode($produtos);
         header("Content-type:application/json"); //o header se prepara para receber um json
