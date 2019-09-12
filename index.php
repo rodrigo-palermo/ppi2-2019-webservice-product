@@ -35,11 +35,15 @@ $app->get("/produtos", function(Request $request, Response $response, array $arg
 }
 ); 
 
+$app->get("/produtos/{id}", function(Request $request, Response $response, array $args) {
+    $id = (int) $args['id'];
+    $produtoDAO = new ProdutoDAO();
+    $produto = $produtoDAO->buscaPorId($id);
+    $response = $response->withJson($produto); //converte a lista para json
+    $response = $response->withHeader("Content-type","application/json");//passa o cabeçalho
+    return $response;
+});
+
 //disponibilizar para  aplicaçao (para ficar escutando as requisicoes)
-
 $app->run();
-
-?>
-
-    
-    
+?>  
