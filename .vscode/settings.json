@@ -23,9 +23,9 @@
                 "name": "WebService Pordutos local folder",
                 "description": "Local folder",
                 //home
-                "dir": "C:/xampp/htdocs/wsprodutosdao"
+                "dir": "C:/xampp/htdocs/wsprodutoslim"
                 //work
-                //"dir": "C:/app/xampp/htdocs/wsprodutosdao"
+                //"dir": ""
             }
         ]
     }

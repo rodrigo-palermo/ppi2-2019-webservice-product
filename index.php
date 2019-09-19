@@ -44,6 +44,31 @@ $app->get("/produtos/{id}", function(Request $request, Response $response, array
     return $response;
 });
 
+$app->post("/produtos", function(Request $request, Response $response) {
+    $request = json_decode($request->getBody());
+    $produtoDAO = new ProdutoDAO();
+    $produto = new Produto();
+    $produto->nome = $request->nome;
+    $produto->preco = $request->preco;
+    $produtoDAO->inserir($produto);
+});
+
+$app->put("/produtos/{id}", function(Request $request, Response $response, array $args) {
+    $request = json_decode($request->getBody());
+    $produtoDAO = new ProdutoDAO();
+    $produto = new Produto();
+    $produto->id = (int) $args['id'];
+    $produto->nome = $request->nome;
+    $produto->preco = $request->preco;
+    $produtoDAO->atualizar($produto);
+});
+
+$app->delete("/produtos/{id}", function(Request $request, Response $response, array $args) {
+    $id = (int) $args['id'];
+    ProdutoDAO::deletar($id);
+
+});
+
 //disponibilizar para  aplicaçao (para ficar escutando as requisicoes)
 $app->run();
 ?>  

@@ -60,7 +60,4 @@ class ProdutoDAO {
         $stmt->execute();
     }
 
-
-
-
 }
